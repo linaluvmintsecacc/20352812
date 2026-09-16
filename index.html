@@ -8,36 +8,48 @@
 
 <style>
 :root {
-  --bg:#d8f5e3;
-  --card:rgba(220,255,230,0.9);
-  --accent:#7fbfa3;
-  --soft:#4f8f75;
-  --text:#1f3b30;
-  --muted:#6c8f80;
+  --bg: #f0f7f4;
+  --card: #ffffff;
+  --accent: #2d6a4f;
+  --soft: #1b4332;
+  --text: #2d3748;
+  --muted: #718096;
+  --input-bg: #f8fafc;
+  --border-color: #cbd5e0;
 }
-body.dark{
-  --bg:#0e1c17;
-  --card:rgba(22,45,37,0.9);
-  --accent:#9fd3b8;
-  --soft:#cfeee0;
-  --text:#eef7f2;
-  --muted:#8faea2;
+
+body.dark {
+  --bg: #0b130f;
+  --card: #13221b;
+  --accent: #52b788;
+  --soft: #74c69d;
+  --text: #e2e8f0;
+  --muted: #a0aec0;
+  --input-bg: #1a2e26;
+  --border-color: #2d4a3e;
 }
+
 *{margin:0;padding:0;box-sizing:border-box;}
 html, body{
   height: 100%;
 }
 body{
   font-family:'Quicksand',sans-serif;
-  background:radial-gradient(circle at top left,rgba(127,191,163,0.3),transparent 40%),
-             radial-gradient(circle at bottom right,rgba(159,211,184,0.3),transparent 40%),
-             var(--bg);
-  color:var(--text);
-  transition:0.4s;
-  overflow-x:hidden;
-  overflow-y:auto;
+  background-color: var(--bg);
+  /* Latar belakang baru: Corak grid estetik moden bercampur rona hijau */
+  background-image: 
+    radial-gradient(var(--accent) 0.75px, transparent 0.75px), 
+    radial-gradient(var(--accent) 0.75px, var(--bg) 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  background-attachment: fixed;
+  color: var(--text);
+  transition: background-color 0.4s, color 0.4s;
+  overflow-x: hidden;
+  overflow-y: auto;
   scroll-behavior: smooth;
 }
+
 section{
   min-height:100vh;
   display:flex;
@@ -46,64 +58,31 @@ section{
   padding:60px 20px;
   position:relative;
 }
-section::before{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:280px;
-  background:rgba(127,191,163,0.15);
-  border-radius:50%;
-  filter:blur(80px);
-  top:10%;
-  left:-100px;
-  z-index:0;
-  animation:float1 10s infinite alternate ease-in-out;
-}
-section::after{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  background:rgba(159,211,184,0.18);
-  border-radius:50%;
-  filter:blur(90px);
-  bottom:10%;
-  right:-120px;
-  z-index:0;
-  animation:float2 12s infinite alternate ease-in-out;
-}
-@keyframes float1{
-  0% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(20px) translateX(10px); }
-  100% { transform: translateY(0) translateX(0); }
-}
-@keyframes float2{
-  0% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-20px) translateX(-10px); }
-  100% { transform: translateY(0) translateX(0); }
-}
+
 .card{
   position:relative;
   z-index:1;
   max-width:800px;
   width:100%;
   padding:50px;
-  border-radius:30px;
-  background:var(--card);
-  backdrop-filter:blur(12px);
-  box-shadow:0 40px 80px rgba(0,0,0,0.15);
-  transition:0.4s;
+  border-radius:24px;
+  background: var(--card);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.4s, border-color 0.4s, box-shadow 0.4s;
 }
+
 h1,h2,h3{font-family:'Caveat',cursive;color:var(--soft);margin-bottom:15px;}
 h1{font-size:3rem;}
 p{margin-bottom:15px;}
 .small{font-size:0.9rem;color:var(--muted);}
-.divider{height:2px;width:100%;background:linear-gradient(to right,transparent,var(--accent),transparent);margin:35px 0;opacity:0.5;}
+.divider{height:2px;width:100%;background:linear-gradient(to right,transparent,var(--accent),transparent);margin:35px 0;opacity:0.3;}
+
 input,textarea{
   width:100%;
-  background:rgba(127,191,163,0.12);
-  border:1px solid rgba(127,191,163,0.25);
-  border-radius:16px;
+  background: var(--input-bg);
+  border:1px solid var(--border-color);
+  border-radius:14px;
   padding:14px;
   color:var(--text);
   margin-bottom:12px;
@@ -111,29 +90,33 @@ input,textarea{
   transition:0.3s;
 }
 textarea{min-height:90px;}
-input:focus,textarea:focus{outline:none;border-color:var(--accent);background:rgba(127,191,163,0.18);}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.2);}
+
 button{
-  background:none;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  padding:12px 34px;
-  border-radius:999px;
-  cursor:pointer;
-  transition:0.3s;
-  font-size:1rem;
+  background: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 12px 34px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  font-size: 1rem;
 }
-button:hover{background:var(--accent);color:var(--bg);}
+button:hover{background:var(--accent);color:#fff;}
 .menu-buttons button{width:100%;margin-bottom:16px;}
+
 .block{
   padding:25px;
-  border-radius:22px;
-  background:linear-gradient(to bottom right,rgba(127,191,163,0.15),rgba(127,191,163,0.03));
+  border-radius:18px;
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
   margin-bottom:35px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 .label{font-size:0.8rem;color:var(--muted);margin-bottom:6px;}
 .toggle{position:fixed;top:20px;right:20px;width:46px;height:46px;border-radius:50%;font-size:1.2rem;z-index:99;}
 .nav{margin-top:30px;text-align:right;}
+
 .locked-overlay{
   position:fixed;
   top:0;left:0;width:100%;height:100%;
@@ -163,7 +146,7 @@ button:hover{background:var(--accent);color:var(--bg);}
     <div class="divider"></div>
     <div class="menu-buttons">
       <button onclick="go('stats')">About Me</button>
-      <button onclick="go('questions')">Questions from 14-year-old me</button>
+      <button onclick="go('questions')">Questions from 15-year-old me</button>
       <button onclick="go('life')">My current life sounds like</button>
     </div>
     <p class="small">10 years already? Wow.</p>
@@ -175,7 +158,6 @@ button:hover{background:var(--accent);color:var(--bg);}
     <h2>About Me</h2>
     <div class="divider"></div>
     <div class="block">
-
        15 Years Old Me: <br>
         <div class="label">Favourite Colour: Hijau <br>
         Ketinggian: 145 cm<br>
@@ -189,9 +171,9 @@ button:hover{background:var(--accent);color:var(--bg);}
         Love language: Physical Touch, Acts of Service, Time Quality, Gift Giving<br>
         Learned Calisthenic Skills: Frog Pose, Crow Pose, Elbow Lever<br>
         Current Home: Sibu Jaya, Sarawak<br>
-        Sexuality: Lesbian<br> </div>
-        </div>
-          <div class="divider"></div>
+        Sexuality: Lesbian<br></div>
+    </div>
+    <div class="divider"></div>
     <div class="block">
       <div class="label">Masa depan</div>
       <input id="statsFuture">
@@ -207,114 +189,42 @@ button:hover{background:var(--accent);color:var(--bg);}
   <div class="card">
     <h2>Questions from 15-year-old me</h2>
     <div class="divider"></div>
-    <div class="block">
-      <h3>Masih bsf dengan Janelvy?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-        <div class="block">
-      <div class="block">
-      <h3>Masih bsf dengan Maschella?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-      <div class="block">
-      <h3>Masih berpangan dengan Maschella?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-        <div class="block">
-        <div class="block">
-      <h3>Dapat masuk aliran computer sains tak??</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-        <div class="block">
-      <h3>Dapat masuk University?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-        <div class="block">
-      <h3>Sekolah menengah, ada wakil sekolah?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-        <div class="block">
-      <h3>any girlfriend? or ex-girlfriend? or even, boyfriend?<h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-        <div class="block">
-      <h3>Masih suka main guitar and rubiks?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-        <div class="block">
-      <h3>Still do calisthenics?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-            <div class="block">
-      <h3>SPM berapa A?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-            <div class="block">
-      <h3>Best tak ada bilik sendiri?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-            <div class="block">
-      <h3>Study abroad?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-            <div class="block">
-      <h3>What's ur current phone?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-            <div class="block">
-      <h3>Dapat experience apartment?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-            <div class="block">
-      <h3>Stary Kids disbanded, what happen to our K-pop girl era?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-                <div class="block">
-      <h3>What something you regret so much?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-                <div class="block">
-      <h3>Have you suprise Janelvy for her birthday yet?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-                <div class="block">
-      <h3>Dah kahwin? Let me guess, no?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-                <div class="block">
-      <h3>Ada bela anjing? atau kucing?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-                <div class="block">
-      <h3>How about our dream house??</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-                <div class="block">
-      <h3>You have a job? If yes, what is it?</h3>
-      <div class="label">Masa depan</div>
-      <textarea id="qFuture"></textarea>
-    </div>
-  </div>
+    
+    <div class="block"><h3>Masih bsf dengan Janelvy?</h3><div class="label">Masa depan</div><textarea id="q1"></textarea></div>
+    <div class="block"><h3>Masih bsf dengan Maschella?</h3><div class="label">Masa depan</div><textarea id="q2"></textarea></div>
+    <div class="block"><h3>Masih berpangan dengan Maschella?</h3><div class="label">Masa depan</div><textarea id="q3"></textarea></div>
+    <div class="block"><h3>Dapat masuk aliran computer sains tak??</h3><div class="label">Masa depan</div><textarea id="q4"></textarea></div>
+    <div class="block"><h3>Dapat masuk University?</h3><div class="label">Masa depan</div><textarea id="q5"></textarea></div>
+    <div class="block"><h3>Sekolah menengah, ada wakil sekolah?</h3><div class="label">Masa depan</div><textarea id="q6"></textarea></div>
+    <div class="block"><h3>any girlfriend? or ex-girlfriend? or even, boyfriend?</h3><div class="label">Masa depan</div><textarea id="q7"></textarea></div>
+    <div class="block"><h3>Masih suka main guitar and rubiks?</h3><div class="label">Masa depan</div><textarea id="q8"></textarea></div>
+    <div class="block"><h3>Still do calisthenics?</h3><div class="label">Masa depan</div><textarea id="q9"></textarea></div>
+    <div class="block"><h3>SPM berapa A?</h3><div class="label">Masa depan</div><textarea id="q10"></textarea></div>
+    <div class="block"><h3>Best tak ada bilik sendiri?</h3><div class="label">Masa depan</div><textarea id="q11"></textarea></div>
+    <div class="block"><h3>Study abroad?</h3><div class="label">Masa depan</div><textarea id="q12"></textarea></div>
+    <div class="block"><h3>What's ur current phone?</h3><div class="label">Masa depan</div><textarea id="q13"></textarea></div>
+    <div class="block"><h3>Dapat experience apartment?</h3><div class="label">Masa depan</div><textarea id="q14"></textarea></div>
+    <div class="block"><h3>Stray Kids disbanded, what happen to our K-pop girl era?</h3><div class="label">Masa depan</div><textarea id="q15"></textarea></div>
+    <div class="block"><h3>What something you regret so much?</h3><div class="label">Masa depan</div><textarea id="q16"></textarea></div>
+    <div class="block"><h3>Have you surpised Janelvy for her birthday yet?</h3><div class="label">Masa depan</div><textarea id="q17"></textarea></div>
+    <div class="block"><h3>Dah kahwin? Let me guess, no?</h3><div class="label">Masa depan</div><textarea id="q18"></textarea></div>
+    <div class="block"><h3>Ada bela anjing? atau kucing?</h3><div class="label">Masa depan</div><textarea id="q19"></textarea></div>
+    <div class="block"><h3>How about our dream house??</h3><div class="label">Masa depan</div><textarea id="q20"></textarea></div>
+    <div class="block"><h3>You have a job? If yes, what is it?</h3><div class="label">Masa depan</div><textarea id="q21"></textarea></div>
+    <div class="block"><h3>What are we? Boy or girl?</h3><div class="label">Masa depan</div><textarea id="q22"></textarea></div>
+    <div class="block"><h3>What is a plot twist in our life over the last decade that I would never, ever believe right now?</h3><div class="label">Masa depan</div><textarea id="q23"></textarea></div>
+    <div class="block"><h3>If you could send a 10-second voice note back to me today, what would you say?</h3><div class="label">Masa depan</div><textarea id="q24"></textarea></div>
+    <div class="block"><h3>What did you finally let go of that you wasted way too much time worrying about today?</h3><div class="label">Masa depan</div><textarea id="q25"></textarea></div>
+    <div class="block"><h3>What is something you love doing today that past-me would find completely out of character?</h3><div class="label">Masa depan</div><textarea id="q26"></textarea></div>
+    <div class="block"><h3>What is a small, seemingly insignificant moment from a decade ago that you now realize was actually a major turning point?</h3><div class="label">Masa depan</div><textarea id="q27"></textarea></div>
+    <div class="block"><h3>Where in the world am I living and what does my daily routine look like? (I got this question from Maschella)</h3><div class="label">Masa depan</div><textarea id="q28"></textarea></div>
+    <div class="block"><h3>What is a risk we were terrified of taking a decade ago that you are now endlessly grateful we had the courage to face?</h3><div class="label">Masa depan</div><textarea id="q29"></textarea></div>
+    <div class="block"><h3>When you measure your life by the depth of your connections rather than your achievements, who truly showed up for you when the lights went out?</h3><div class="label">Masa depan</div><textarea id="q30"></textarea></div>
+    <div class="block"><h3>Process move on from Maschella?</h3><div class="label">Masa depan</div><textarea id="q31"></textarea></div>
+    <div class="block"><h3>Are you glad that you broke up with Maschella? Do you found someone who you love more or equally like how you used to love Mashella?</h3><div class="label">Masa depan</div><textarea id="q31"></textarea></div>
+    <div class="block"><h3>If you could travel back to this exact moment in time, what part of my daily life would you tell me to slow down and savor before it slips away?</h3><div class="label">Masa depan</div><textarea id="q31"></textarea></div>
+    <div class="block"><h3>Someone you missed the most in my time?</h3><div class="label">Masa depan</div><textarea id="q31"></textarea></div>
+
     <div class="nav">
       <button onclick="submitAnswers()">Submit Answers</button>
       <button onclick="go('menu')">Menu</button>
@@ -327,10 +237,10 @@ button:hover{background:var(--accent);color:var(--bg);}
     <h2>My current life sounds like</h2>
     <div class="divider"></div>
     <div class="block">
-       14 Years Old Me: <br>
-        <div class="label"> Normal life, yesterday was literally the best birthday I ever had. Meme in 2026, haish, 67 masih on. Sampai ada lagu 67. Tahun ni aku masuk kelas 3A, kena belajar sains and math dalam bahasa English. Susah lah at first, tapi lama2 dah terbiasaa. aku duduk sebelah Janelle. Aku masih berpangan dengan Maschella sekarang, and kitorang tengah call, and first time aku on mic call dia, guna voice changer lah. Cita2 aku sekarang nak jadi programmer. Tahun ni paling banyak lah aku keluar dengan kawan, hihi. I joined YIC, and yeah kalah lahh. Atleast i get a new experience. Still no phone even tho my bd has passed  
-
-            <div class="divider"></div>
+       15 Years Old Me: <br>
+        <div class="label"> Normal life, this year's birthday was the best birthday I've ever had. Meme in 2026, haish, 67 masih on. Sampai ada lagu 67. Tahun ni aku masuk kelas 3A, kena belajar sains and math dalam bahasa English. Susah lah at first, tapi lama2 dah terbiasaa. aku duduk sebelah Janelle. Aku masih berpangan dengan Maschella sekarang, and kitorang tengah call, and first time aku on mic call dia, guna voice changer lah. Cita2 aku sekarang nak jadi programmer. Tahun ni paling banyak lah aku keluar dengan kawan, hihi. I joined YIC, and yeah kalah lahh. Atleast i get a new experience. Still no phone even tho my bd has passed. Thinking about being transgender rn... Idk what's the best for me and Maschella, should I do it for her? I was thinking doing it after I get a job and have enough money. Are we a "boy" now? IDK what to hope. This year, Mel banyak buat masalah. I think thats all I want to say here. Please share your story :D</div>
+    </div>
+    <div class="divider"></div>
     <div class="block">
       <div class="label">Masa depan</div>
       <input id="lifeFuture">
@@ -359,12 +269,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Scroll & mode
 function go(id){
   const el = document.getElementById(id);
   if(el){
     const rect = el.getBoundingClientRect();
-    const topPos = rect.top + window.pageYOffset - 20; // Restore -20px offset
+    const topPos = rect.top + window.pageYOffset - 20;
     window.scrollTo({ top: topPos, behavior: 'smooth' });
   }
 }
@@ -374,63 +283,72 @@ function toggleMode(){
   document.querySelector(".toggle").textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
 }
 
-// Submit answers
 async function submitAnswers(){
   const futureData = {
     statsFuture: document.getElementById("statsFuture").value,
-    qFuture: document.getElementById("qFuture").value,
     lifeFuture: document.getElementById("lifeFuture").value
   };
+  
+  for(let i = 1; i <= 31; i++){
+    const field = document.getElementById("q" + i);
+    if(field){
+      futureData["q" + i] = field.value;
+    }
+  }
+
   try{
     await setDoc(doc(db,"timeCapsule","futureAnswers"), futureData, { merge: true });
     alert("Jawapan telah disimpan! Future answers sync ke Firebase.");
   }catch(e){console.error(e); alert("Gagal simpan future answers.");}
 }
 
-// Load saved answers
 function loadAnswers(){
   getDoc(doc(db,"timeCapsule","futureAnswers")).then(docSnap=>{
     if(docSnap.exists()){
       const data = docSnap.data();
       document.getElementById("statsFuture").value = data.statsFuture || "";
-      document.getElementById("qFuture").value = data.qFuture || "";
       document.getElementById("lifeFuture").value = data.lifeFuture || "";
+      
+      for(let i = 1; i <= 31; i++){
+        const field = document.getElementById("q" + i);
+        if(field && data["q" + i]){
+          field.value = data["q" + i];
+        }
+      }
     }
   });
 }
 
-// Lock website
 function lockSite(){
-  if(confirm("Anda pasti mahu lock website sehingga 28 Disember 2035?")){
-    localStorage.setItem("lockedUntil","2035-12-28T00:00:00");
+  if(confirm("Anda pasti mahu lock website sehingga 16 September 2036?")){
+    localStorage.setItem("lockedUntil","2036-09-16T00:00:00");
     applyLock();
   }
 }
 function applyLock(){
   const overlay = document.getElementById("lockedOverlay");
-  const lockTime = new Date(localStorage.getItem("lockedUntil"));
+  const lockTime = localStorage.getItem("lockedUntil") ? new Date(localStorage.getItem("lockedUntil")) : null;
   const now = new Date();
-  if(lockTime && now<lockTime){
+  if(lockTime && now < lockTime){
     overlay.style.display="flex";
     document.querySelectorAll("input,textarea,button").forEach(el=>el.disabled=true);
-  }else overlay.style.display="none";
+  } else {
+    overlay.style.display="none";
+  }
 }
 
-// Auto-scroll jika URL ada hash (100% stabil)
 window.addEventListener("load", () => {
   const hash = window.location.hash.substring(1);
   if(hash){
-    setTimeout(() => { // Increase delay for layout stability
+    setTimeout(() => {
       go(hash);
-    }, 500); // Try 500ms; increase to 1000ms if needed
+    }, 500);
   }
 });
 
-// Init
 loadAnswers();
 applyLock();
 
-// Expose functions to global scope for onclick attributes
 window.go = go;
 window.toggleMode = toggleMode;
 window.submitAnswers = submitAnswers;
